@@ -29,6 +29,16 @@ class MainActivity : AppCompatActivity() {
             Repo("Repo 7"),
             Repo("Repo 8"),
             Repo("Repo 9"),
+            Repo("Repo 10"),
+            Repo("Repo 1"),
+            Repo("Repo 2"),
+            Repo("Repo 3"),
+            Repo("Repo 4"),
+            Repo("Repo 5"),
+            Repo("Repo 6"),
+            Repo("Repo 7"),
+            Repo("Repo 8"),
+            Repo("Repo 9"),
             Repo("Repo 10")
         )
 
