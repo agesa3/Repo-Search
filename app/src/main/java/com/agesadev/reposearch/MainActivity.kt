@@ -6,6 +6,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.agesadev.reposearch.adapter.ReposAdapter
 import com.agesadev.reposearch.models.Repo
+import com.agesadev.reposearch.network.SearchResult
+import com.agesadev.reposearch.network.createGithubApiService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,30 +24,18 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
 
-        val sampleData = listOf<Repo>(
-            Repo("Repo 1"),
-            Repo("Repo 2"),
-            Repo("Repo 3"),
-            Repo("Repo 4"),
-            Repo("Repo 5"),
-            Repo("Repo 6"),
-            Repo("Repo 7"),
-            Repo("Repo 8"),
-            Repo("Repo 9"),
-            Repo("Repo 10"),
-            Repo("Repo 1"),
-            Repo("Repo 2"),
-            Repo("Repo 3"),
-            Repo("Repo 4"),
-            Repo("Repo 5"),
-            Repo("Repo 6"),
-            Repo("Repo 7"),
-            Repo("Repo 8"),
-            Repo("Repo 9"),
-            Repo("Repo 10")
-        )
+        val service = createGithubApiService()
+        service.searchRepositories("android").enqueue(object : Callback<SearchResult> {
+            override fun onResponse(call: Call<SearchResult>, response: Response<SearchResult>) {
+                val repos = response.body()?.items.orEmpty()
+                adapter.submitList(repos)
+            }
 
-        adapter.submitList(sampleData)
+            override fun onFailure(call: Call<SearchResult>, t: Throwable) {
+
+            }
+
+        })
 
     }
 }
