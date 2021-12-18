@@ -2,6 +2,7 @@ package com.agesadev.reposearch
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.agesadev.reposearch.adapter.ReposAdapter
@@ -14,12 +15,15 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
-    private val adapter = ReposAdapter()
+    private lateinit var adapter: ReposAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        adapter = ReposAdapter { repo ->
+            Toast.makeText(this, repo.name, Toast.LENGTH_SHORT).show()
+        }
         val recyclerView = findViewById<RecyclerView>(R.id.repoRecyclerview)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter

@@ -32,7 +32,7 @@ val diffCallback = object : DiffUtil.ItemCallback<Repo>() {
 }
 
 
-class ReposAdapter : ListAdapter<Repo, RepoViewHolder>(diffCallback) {
+class ReposAdapter(private val repoClickHandler:(Repo)->Unit) : ListAdapter<Repo, RepoViewHolder>(diffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.repo_item, parent, false)
         return RepoViewHolder(view)
@@ -40,6 +40,9 @@ class ReposAdapter : ListAdapter<Repo, RepoViewHolder>(diffCallback) {
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            repoClickHandler(getItem(position))
+        }
     }
 
 }
