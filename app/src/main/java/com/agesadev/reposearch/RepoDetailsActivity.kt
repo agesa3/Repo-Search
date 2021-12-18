@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import com.agesadev.reposearch.models.Repo
 
 class RepoDetailsActivity : AppCompatActivity() {
@@ -13,6 +14,13 @@ class RepoDetailsActivity : AppCompatActivity() {
 
         val name = intent.getStringExtra(KEY_NAME)
         val ownerName = intent.getStringExtra(KEY_OWNER_NAME)
+
+        val nameText = findViewById<TextView>(R.id.name_repo)
+        val ownerNameText = findViewById<TextView>(R.id.ownerName)
+
+        nameText.text = name
+        ownerNameText.text = "$ownerName"
+
     }
 
     companion object {

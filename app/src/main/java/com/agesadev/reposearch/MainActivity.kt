@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         adapter = ReposAdapter { repo ->
-            RepoDetailsActivity.startActivity(this,repo)
+            RepoDetailsActivity.startActivity(this, repo)
         }
         val recyclerView = findViewById<RecyclerView>(R.id.repoRecyclerview)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<SearchResult>, t: Throwable) {
-
+                Toast.makeText(this@MainActivity, "An error Occurred", Toast.LENGTH_SHORT).show()
             }
 
         })
